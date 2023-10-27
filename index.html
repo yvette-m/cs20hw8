@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>API HW</title>
+</head>
+<body>
+    <h1>Ditto Public API</h1>
+    <div id="api-data"></div>
+
+    <script>
+        const api = 'https://pokeapi.co/api/v2/pokemon/ditto';
+
+        fetch(api)
+            .then(response => response.json())
+            .then(data => {
+                const apiData = document.getElementById('api-data');
+
+                const nameElement = document.createElement('p');
+                nameElement.textContent = `Name: ${data.name}, ID: ${data.id}`;
+
+                apiData.appendChild(nameElement);
+
+                const abilitiesElement = document.createElement('p');
+                abilitiesElement.textContent = 'Abilities: ';
+                data.abilities.forEach(ability => {
+                    abilitiesElement.textContent += `${ability.ability.name}, `;
+                });
+
+                abilitiesElement.textContent = abilitiesElement.textContent.slice(0, -2);
+                apiData.appendChild(abilitiesElement);
+
+                const typesElement = document.createElement('p');
+                typesElement.textContent = 'Types: ';
+                data.types.forEach(type => {
+                    typesElement.textContent += `${type.type.name}, `;
+                });
+                typesElement.textContent = typesElement.textContent.slice(0, -2);
+                apiData.appendChild(typesElement);
+
+                const statsElement = document.createElement('p');
+                statsElement.textContent = 'Stats: ';
+                data.stats.forEach(stat => {
+                    statsElement.textContent += `${stat.stat.name}: ${stat.base_stat}, `;
+                });
+                statsElement.textContent = statsElement.textContent.slice(0, -2);
+                apiData.appendChild(statsElement);
+
+                const imgElement = document.createElement('img');
+                imgElement.src = data.sprites.front_default;
+                apiData.appendChild(imgElement);
+            })
+            .catch(error => console.error('Error:', error));
+
+    </script>
+
+    <br>
+        <div id="question">
+            <p>I choice the ditto Pokedex API. 
+                <br> The Pokemon API makes all Pokemon data avaiable in one location. 
+                <br> I specifically choice the ditto section of the API because he's cute. 
+                <br>(I really don't have another reason)
+                <br>I found this API by looking up "fun APIs" from the website 
+                <br>
+                https://medium.com/codex/15-fun-and-interesting-apis-to-use-for-your-next-coding-project-in-2022-86a4ff3a2742
+                <br>
+                The paramerater I choice was Ditto out of all the pokemon in the Pokedex 
+                <br> API other than that I sorted all of Ditto's information using javascript
+                <br> and then pulled out and printed only relevant information such as
+                <br> his name, id, abilities, and stats. I also pulled out his image to 
+                <br> display to the page.
+                <br>
+                Applications were this can be used: In a game, some type of Pokemon
+                <br> style game. Or a website about pokemon - like some type of 
+                <br> sorting data website to see information about each pokemon.
+            </p>
+        </div>
+    
+</body>
+</html>
